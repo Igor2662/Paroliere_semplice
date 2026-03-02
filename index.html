@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Attività Interattiva</title>
+
+  <!-- 🔗 Collegamento ai file separati -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h2>Attività Interattiva</h2>
+  <!-- 🔊 Bottone globale (inizialmente nascosto) -->
+  <button id="speakWord" style="display:none;">🔊 Pronuncia</button>
+  <div id="scoreBox"><div id="scoreStar">⭐<span id="scoreNumber">0</span></div></div>
+
+  <!-- 🔹 Layout principale a due colonne -->
+  <div id="layout">
+    <!-- 🔸 Box media (immagine, video, audio) -->
+    <div id="mediaBox"></div>
+
+    <!-- 🔸 Area di gioco -->
+    <div id="gameArea">
+
+      <div id="menu" class="visible">
+        <div id="logoBox">
+          <img src="igorproget-logo.png" alt="IGORproget" id="logoImage" style="width:300px;max-width:80%;height:auto">
+        </div>
+        <button id="startCompose">🧩 Componi la parola</button>
+        <button id="startMissing">🔤 Lettera mancante</button>
+        <button id="startFirst">🔍 Scopri la prima lettera</button>
+        <button id="startVowel">🅰️ Inserisci la vocale</button>
+        <button id="loadWords">📁 Carica parole da file</button>
+        <input type="file" id="fileInput" accept="application/json" style="display:none">
+		<button id="toggleCase">🔠 Maiuscolo / minuscolo</button>
+      </div>
+
+      <!-- 🅰️ Modalità “Inserisci la vocale” -->
+      <div id="vowelMode">
+        <div id="imageBoxVowel"></div>
+        <div id="wordBoxVowel"></div>
+        <div id="optionsVowel"></div>
+        <button id="nextVowel">Avanti</button>
+        <button id="backMenu4">Menu</button>
+      </div>
+
+      <div id="composeMode">
+        <div id="imageBox"></div>
+        <div id="targetWord"></div>
+        <div id="letters"></div>
+        <button id="nextCompose">Avanti</button>
+        <button id="backMenu1">Menu</button>
+		<button id="magicHint">🪄 Bacchetta magica</button>
+      </div>
+
+      <div id="missingMode">
+        <div id="imageBoxMissing"></div>
+        <div id="wordBox"></div>
+        <div id="options"></div>
+        <button id="nextMissing">Avanti</button>
+        <button id="backMenu2">Menu</button>
+      </div>
+
+      <div id="firstLetterMode">
+        <div id="imageBoxFirst"></div>
+        <div id="wordBoxFirst"></div>
+        <div id="optionsFirst"></div>
+        <button id="nextFirst">Avanti</button>
+        <button id="backMenu3">Menu</button>
+      </div>
+
+    </div><!-- fine gameArea -->
+  </div><!-- fine layout -->
+
+  <!-- Audio -->
+  <audio id="soundCorrect" src="correct.mp3"></audio>
+  <audio id="soundWrong" src="wrong.mp3"></audio>
+  <audio id="soundComplete" src="complete.mp3"></audio>
+
+  <!-- 🔗 Script principale -->
+  <script src="script.js"></script>
+</body>
+</html>
