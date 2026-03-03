@@ -2,7 +2,7 @@
 /* ---------- dati originali ---------- */
 const originalObjects = [
   { emoji: "🎵️", word: "INNO", mediaSrc: "media/inno.mp4" },
-  { emoji: "🐱", word: "GATTO", mediaSrc: "media/gatto.mp3" },
+  { emoji: "🐱", word: "GATTO", phoneticPc: "gatti", phoneticAndroid: "gatta", mediaSrc: "media/gatto.mp3"},
   { emoji: "🚲", word: "BICICLETTA", mediaSrc: "media/bici.jpg" },
   // 🎒 Oggetti dell'astuccio
   { emoji: "✏️", word: "MATITA" },
@@ -63,7 +63,8 @@ const originalObjects = [
 let objects = [...originalObjects];
 let score = 0;
 let mistakes = 0;
-let currentWord = ''; // parola corrente per il bottone "Pronuncia"
+//let currentWord = ''; // parola corrente per il bottone "Pronuncia"
+let currentObject = null; // parola corrente per bottone "Pronuncia"
 let isUppercase = true; // stato iniziale
 
 function toggleCase() {
@@ -202,7 +203,8 @@ function startCompose(){
   showMedia(chosen.mediaSrc);
   const word = isUppercase ? chosen.word.toUpperCase() : chosen.word.toLowerCase();
   //currentWord = word; // aggiorna la parola da pronunciare
-  currentWord = chosen.word.toLowerCase();
+  //currentWord = chosen.word.toLowerCase();
+  currentObject = chosen;
   const shuffled = word.split('').sort(()=>Math.random()-0.5);
 
   const imageBox = document.getElementById('imageBox');
@@ -330,8 +332,8 @@ function startMissing(){
 
   // rispetta lo stato maiuscolo/minuscolo se esiste isUppercase
   const word = (typeof isUppercase === 'undefined' || isUppercase) ? chosen.word.toUpperCase() : chosen.word.toLowerCase();
-  currentWord = chosen.word.toUpperCase(); // parola piena per la pronuncia (maiuscola per TTS)
-
+  //currentWord = chosen.word.toUpperCase(); // parola piena per la pronuncia (maiuscola per TTS)
+  currentObject = chosen; // per la prouncia da phonetic
   const missingIndex = Math.floor(Math.random()*word.length);
   const missingLetter = word[missingIndex];
 
@@ -377,8 +379,9 @@ function startFirstLetter(){
 
   // rispetta lo stato maiuscolo/minuscolo
   const word = (typeof isUppercase === 'undefined' || isUppercase) ? chosen.word.toUpperCase() : chosen.word.toLowerCase();
-  currentWord = chosen.word.toUpperCase();
-
+  //currentWord = chosen.word.toUpperCase(); sostituita dalla riga sotto
+  currentObject = chosen;
+  
   const firstLetter = word[0];
 
   document.getElementById('imageBoxFirst').textContent = chosen.emoji;
@@ -512,40 +515,7 @@ function startVowel() {
   });
 }
 
-function pronounceWord() {
-  // Trova la parola attualmente mostrata in una delle modalità
-  const visibleSection = document.querySelector('.visible');
-  if (!visibleSection) return;
 
-  let word = null;
-  const possibleIds = ['targetWord', 'wordBox', 'wordBoxFirst', 'wordBoxVowel'];
-  for (const id of possibleIds) {
-    const el = visibleSection.querySelector('#' + id);
-    if (el && el.textContent && el.textContent.includes('_') === false) {
-      word = el.textContent.trim();
-      break;
-    }
-  }
-
-  // Se non è ancora completa (ha "_"), prova a usare la parola in corso
-  if (!word) {
-    const incomplete = visibleSection.querySelector('#wordBox, #wordBoxFirst, #wordBoxVowel, #targetWord');
-    if (incomplete && incomplete.textContent)
-      word = incomplete.textContent.replace(/_/g, '');
-  }
-
-  if (!word) {
-    alert("Nessuna parola da pronunciare!");
-    return;
-  }
-
-  // Usa la sintesi vocale del browser
-  const utterance = new SpeechSynthesisUtterance(word);
-  utterance.lang = 'it-IT';
-  utterance.rate = 0.9;
-  utterance.pitch = 1.1;
-  speechSynthesis.speak(utterance);
-}
 
 /* ---------- listeners ---------- */
 document.getElementById('startCompose').addEventListener('click', ()=>{ showSection('composeMode'); startCompose(); });
@@ -577,36 +547,36 @@ showSection = function (id) {
   updateSpeakButtonVisibility(id);
 };
 
+function isAndroid() {
+  return /Android/i.test(navigator.userAgent);
+}
+
 // 🔊 Pronuncia la parola corrente (robusta)
 function speakCurrentWord() {
-  let wordToSpeak = currentWord || '';
+  if (!currentObject) return;
 
-  // fallback: se vuota, prova a leggere dal testo visibile
-  if (!wordToSpeak) {
-    const visibleSection = document.querySelector('.visible');
-    if (visibleSection) {
-      const el = visibleSection.querySelector('#targetWord, #wordBox, #wordBoxFirst, #wordBoxVowel');
-      if (el && el.textContent) {
-        wordToSpeak = el.textContent.replace(/_/g, '');
-      }
-    }
+  let textToSpeak = currentObject.word;
+
+  if (isAndroid() && currentObject.phoneticAndroid) {
+    textToSpeak = currentObject.phoneticAndroid;
+  } 
+  else if (!isAndroid() && currentObject.phoneticPc) {
+    textToSpeak = currentObject.phoneticPc;
   }
-
-  // pulizia testo
-  wordToSpeak = (wordToSpeak || '').trim().toUpperCase().replace(/[^A-ZÀ-ÖÙ-Ú]/gi, '');
-  if (!wordToSpeak) return;
 
   if (speechSynthesis.speaking) speechSynthesis.cancel();
 
-  const utterance = new SpeechSynthesisUtterance(wordToSpeak);
+  const utterance = new SpeechSynthesisUtterance(textToSpeak);
   utterance.lang = 'it-IT';
   utterance.rate = 0.95;
   utterance.pitch = 1.0;
+
   speechSynthesis.speak(utterance);
 }
 
 // collega il bottone (una sola volta)
-document.getElementById('speakWord').addEventListener('click', speakCurrentWord);
+document.getElementById('speakWord')
+  .addEventListener('click', speakCurrentWord);
 
 /* ---------- caricamento parole da file JSON ---------- */
 document.getElementById('loadWords').addEventListener('click', () => {
@@ -684,7 +654,7 @@ function showMedia(fileName) {
 }
 // 🪄 Bottone "Bacchetta magica"
 document.getElementById("magicHint").addEventListener("click", () => {
-  if (!currentWord) {
+  if (!currentObject) {
     alert("Nessuna parola attiva!");
     return;
   }
@@ -697,24 +667,20 @@ document.getElementById("magicHint").addEventListener("click", () => {
     return;
   }
 
-  // Mostra temporaneamente la parola nelle caselle VUOTE
+  // Mostra temporaneamente la parola nelle caselle vuote
   letterBoxes.forEach((box, index) => {
     if (!box.textContent || box.textContent.trim() === "") {
-      box.dataset.original = ""; // salva stato iniziale
-      box.textContent = currentWord[index].toUpperCase();
+      box.dataset.original = box.textContent || ""; // salva stato iniziale
+      const char = isUppercase ? currentObject.word[index].toUpperCase() : currentObject.word[index].toLowerCase();
+      box.textContent = char;
       box.classList.add("magic-visible");
     }
   });
 
   // 🔊 Pronuncia la parola
-  const utterance = new SpeechSynthesisUtterance(currentWord);
-  utterance.lang = "it-IT";
-  utterance.rate = 0.9;
-  utterance.pitch = 1.1;
-  speechSynthesis.cancel();
-  speechSynthesis.speak(utterance);
+  speakCurrentWord(); // usa la funzione già corretta
 
-  // Dopo 3 secondi ripristina le caselle bianche
+  // Dopo 1 secondo ripristina le caselle vuote
   setTimeout(() => {
     letterBoxes.forEach(box => {
       if (box.classList.contains("magic-visible")) {
