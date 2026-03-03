@@ -418,25 +418,26 @@ function startFirstLetter(){
 /* ---------- vowel mode ---------- */
 /* ---------- modalità INSERISCI LA VOCALE ---------- */
 function startVowel() {
-  // ✅ Se non ci sono parole disponibili, mostra un messaggio e torna al menu
   if (!objects || objects.length === 0) {
     alert("⚠️ Nessuna parola disponibile! Carica un file JSON o riavvia il gioco.");
     showMenu();
     return;
   }
 
-  // ✅ Scelta casuale della parola
   const idx = Math.floor(Math.random() * objects.length);
   const chosen = objects.splice(idx, 1)[0];
   showMedia(chosen.mediaSrc);
 
-  // ✅ Applica maiuscolo/minuscolo in base al toggle
+  // Rispetta maiuscolo/minuscolo
   const word = (typeof isUppercase === "undefined" || isUppercase)
     ? chosen.word.toUpperCase()
     : chosen.word.toLowerCase();
-  currentWord = chosen.word.toUpperCase(); // serve per la pronuncia
 
-  // ✅ Scegli una vocale casuale da togliere
+  // 🔴 Aggiorna anche currentObject
+  currentObject = chosen;  // <<< questa riga è cruciale
+  currentWord = chosen.word.toUpperCase(); // serve per eventuali altre funzioni
+
+  // Selezione vocale casuale
   const vowels = ["A", "E", "I", "O", "U"];
   const wordUpper = word.toUpperCase();
   const vowelPositions = [];
@@ -445,7 +446,6 @@ function startVowel() {
     if (vowels.includes(wordUpper[i])) vowelPositions.push(i);
   }
 
-  // Se la parola non contiene vocali, ne scegliamo un’altra
   if (vowelPositions.length === 0) {
     startVowel();
     return;
@@ -454,10 +454,8 @@ function startVowel() {
   const missingIndex = vowelPositions[Math.floor(Math.random() * vowelPositions.length)];
   const missingVowel = word[missingIndex];
 
-  // ✅ Mostra immagine e parola con vocale mancante
   document.getElementById("imageBoxVowel").textContent = chosen.emoji;
 
-  // Inserisci underscore come span per poterlo colorare poi
   const wordBox = document.getElementById("wordBoxVowel");
   wordBox.innerHTML = word
     .split("")
@@ -468,7 +466,6 @@ function startVowel() {
     )
     .join("");
 
-  // ✅ Mostra le 5 opzioni vocali in linea orizzontale
   const optionsDiv = document.getElementById("optionsVowel");
   optionsDiv.innerHTML = "";
   optionsDiv.style.display = "flex";
@@ -489,11 +486,10 @@ function startVowel() {
       if (correct) {
         btn.classList.add("correct");
 
-        // 💚 Effetto visivo: coloriamo la vocale nel punto giusto
         const slot = document.getElementById("missingVowelSlot");
         if (slot) {
           slot.textContent = missingVowel;
-          slot.style.color = "#2ecc71"; // verde chiaro
+          slot.style.color = "#2ecc71";
           slot.style.transition = "color 0.3s ease";
         }
 
