@@ -11,9 +11,13 @@
 
 <body>
   <h2>Attività Interattiva</h2>
+
   <!-- 🔊 Bottone globale (inizialmente nascosto) -->
   <button id="speakWord" style="display:none;">🔊 Pronuncia</button>
-  <div id="scoreBox"><div id="scoreStar">⭐<span id="scoreNumber">0</span></div></div>
+
+  <div id="scoreBox">
+    <div id="scoreStar">⭐<span id="scoreNumber">0</span></div>
+  </div>
 
   <!-- 🔹 Layout principale a due colonne -->
   <div id="layout">
@@ -23,17 +27,34 @@
     <!-- 🔸 Area di gioco -->
     <div id="gameArea">
 
+      <!-- 🔹 MENU PRINCIPALE -->
       <div id="menu" class="visible">
         <div id="logoBox">
           <img src="igorproget-logo.png" alt="IGORproget" id="logoImage" style="width:300px;max-width:80%;height:auto">
         </div>
+
+        <!-- Bottoni principali -->
         <button id="startCompose">🧩 Componi la parola</button>
         <button id="startMissing">🔤 Lettera mancante</button>
         <button id="startFirst">🔍 Scopri la prima lettera</button>
         <button id="startVowel">🅰️ Inserisci la vocale</button>
         <button id="loadWords">📁 Carica parole da file</button>
         <input type="file" id="fileInput" accept="application/json" style="display:none">
-		<button id="toggleCase">🔠 Maiuscolo / minuscolo</button>
+        <button id="toggleCase">🔠 Maiuscolo / minuscolo</button>
+
+        <hr style="margin:15px 0;">
+
+        <!-- 🔊 Selettori TTS -->
+        <label for="voiceSelect">Voce:</label>
+        <select id="voiceSelect"></select>
+
+        <label for="voiceModeSelect">Lettura:</label>
+        <select id="voiceModeSelect">
+          <option value="auto">🤖 Auto</option>
+          <option value="pc">🖥️ PC (Standard)</option>
+          <option value="android">📱 Android (Slow)</option>
+          <option value="syllables">🧩 Solo Sillabe</option>
+        </select>
       </div>
 
       <!-- 🅰️ Modalità “Inserisci la vocale” -->
@@ -45,15 +66,17 @@
         <button id="backMenu4">Menu</button>
       </div>
 
+      <!-- Modalità Componi parola -->
       <div id="composeMode">
         <div id="imageBox"></div>
         <div id="targetWord"></div>
         <div id="letters"></div>
         <button id="nextCompose">Avanti</button>
         <button id="backMenu1">Menu</button>
-		<button id="magicHint">🪄 Bacchetta magica</button>
+        <button id="magicHint">🪄 Bacchetta magica</button>
       </div>
 
+      <!-- Modalità Lettera mancante -->
       <div id="missingMode">
         <div id="imageBoxMissing"></div>
         <div id="wordBox"></div>
@@ -62,6 +85,7 @@
         <button id="backMenu2">Menu</button>
       </div>
 
+      <!-- Modalità Scopri prima lettera -->
       <div id="firstLetterMode">
         <div id="imageBoxFirst"></div>
         <div id="wordBoxFirst"></div>

@@ -1,63 +1,64 @@
 
 /* ---------- dati originali ---------- */
 const originalObjects = [
-  { emoji: "🎵️", word: "INNO", mediaSrc: "media/inno.mp4" },
+  { emoji: "🎵️", word: "INNO", phoneticPc: "inno", phoneticAndroid: "inno", mediaSrc: "media/inno.mp4" },
   { emoji: "🐱", word: "GATTO", phoneticPc: "gatti", phoneticAndroid: "gatta", mediaSrc: "media/gatto.mp3"},
-  { emoji: "🚲", word: "BICICLETTA", mediaSrc: "media/bici.jpg" },
+  { emoji: "🚲", word: "BICICLETTA", phoneticPc: "bichicletta", phoneticAndroid: "bichicletta", mediaSrc: "media/bici.jpg" },
+
   // 🎒 Oggetti dell'astuccio
-  { emoji: "✏️", word: "MATITA" },
-  { emoji: "🖊️", word: "PENNA" },
-  { emoji: "🖍️", word: "PASTELLO" },
-  { emoji: "📏", word: "RIGHELLO" },
-  { emoji: "📐", word: "SQUADRA" },
-  { emoji: "✂️", word: "FORBICI" },
-  { emoji: "🧽", word: "SPUGNA" },
-  { emoji: "📕", word: "LIBRO" },
+  { emoji: "✏️", word: "MATITA", phoneticPc: "matita", phoneticAndroid: "matita" },
+  { emoji: "🖊️", word: "PENNA", phoneticPc: "penna", phoneticAndroid: "penna" },
+  { emoji: "🖍️", word: "PASTELLO", phoneticPc: "pastello", phoneticAndroid: "pastello" },
+  { emoji: "📏", word: "RIGHELLO", phoneticPc: "righello", phoneticAndroid: "righello" },
+  { emoji: "📐", word: "SQUADRA", phoneticPc: "squadra", phoneticAndroid: "squadra" },
+  { emoji: "✂️", word: "FORBICI", phoneticPc: "forbici", phoneticAndroid: "forbici" },
+  { emoji: "🧽", word: "SPUGNA", phoneticPc: "spugna", phoneticAndroid: "spugna" },
+  { emoji: "📕", word: "LIBRO", phoneticPc: "libro", phoneticAndroid: "libro" },
 
   // 🛝 Oggetti del parco
-  { emoji: "🛝", word: "SCIVOLO" },
-  { emoji: "🧸", word: "ORSO" },
-  { emoji: "⚽", word: "PALLONE" },
-  { emoji: "🚲", word: "BICICLETTA" },
-  { emoji: "🪁", word: "AQUILONE" },
-  { emoji: "🛴", word: "MONOPATTINO" },
-  { emoji: "🪀", word: "YOYO" },
-  { emoji: "🧃", word: "SUCCO" },
-  { emoji: "🧢", word: "CAPPELLINO" },
-  
-  // tecnicamente frutta!
-  { emoji: "🍎", word: "MELA" },
-  { emoji: "🍐", word: "PERA" },
-  { emoji: "🍊", word: "ARANCIA" },
-  { emoji: "🍋", word: "LIMONE" },
-  { emoji: "🍌", word: "BANANA" },
-  { emoji: "🍉", word: "ANGURIA" },
-  { emoji: "🍇", word: "UVA" },
-  { emoji: "🍓", word: "FRAGOLA" },
-  { emoji: "🫐", word: "MIRTILLI" },
-  { emoji: "🥝", word: "KIWI" , mediaSrc: "media/kiwi.jpg"},
-  { emoji: "🍍", word: "ANANAS" },
-  { emoji: "🥭", word: "MANGO" },
-  { emoji: "🍈", word: "MELONE" },
-  { emoji: "🍒", word: "CILIEGIE" },
-  { emoji: "🍅", word: "POMODORO" },
-    // 🧼 Extra oggetti familiari
-  { emoji: "🪥", word: "SPAZZOLINO" },
-  { emoji: "🧺", word: "CESTO" },
-  { emoji: "🧦", word: "CALZINI" },
-  { emoji: "🧤", word: "GUANTI" },
-  // 🍽️ Oggetti da cucina
-  { emoji: "🥄", word: "CUCCHIAIO" },
-  { emoji: "🔪", word: "COLTELLO" },
-  { emoji: "🧊", word: "GHIACCIO" },
-    // 🛝 Oggetti del parco
-  { emoji: "🛝", word: "SCIVOLO" },
-  { emoji: "🎈", word: "PALLONCINO" },
+  { emoji: "🛝", word: "SCIVOLO", phoneticPc: "scivolo", phoneticAndroid: "scivolo" },
+  { emoji: "🧸", word: "ORSO", phoneticPc: "orso", phoneticAndroid: "orso" },
+  { emoji: "⚽", word: "PALLONE", phoneticPc: "pallone", phoneticAndroid: "pallone" },
+  { emoji: "🪁", word: "AQUILONE", phoneticPc: "aquilone", phoneticAndroid: "aquilone" },
+  { emoji: "🛴", word: "MONOPATTINO", phoneticPc: "monopattino", phoneticAndroid: "monopattino" },
+  { emoji: "🪀", word: "YOYO", phoneticPc: "yoyo", phoneticAndroid: "yoyo" },
+  { emoji: "🧃", word: "SUCCO", phoneticPc: "succo", phoneticAndroid: "succo" },
+  { emoji: "🧢", word: "CAPPELLINO", phoneticPc: "cappellino", phoneticAndroid: "cappellino" },
+
+  // Frutta
+  { emoji: "🍎", word: "MELA", phoneticPc: "mela", phoneticAndroid: "mela" },
+  { emoji: "🍐", word: "PERA", phoneticPc: "pera", phoneticAndroid: "pera" },
+  { emoji: "🍊", word: "ARANCIA", phoneticPc: "arancia", phoneticAndroid: "arancia" },
+  { emoji: "🍋", word: "LIMONE", phoneticPc: "limone", phoneticAndroid: "limone" },
+  { emoji: "🍌", word: "BANANA", phoneticPc: "banana", phoneticAndroid: "banana" },
+  { emoji: "🍉", word: "ANGURIA", phoneticPc: "anguria", phoneticAndroid: "anguria" },
+  { emoji: "🍇", word: "UVA", phoneticPc: "uva", phoneticAndroid: "uva" },
+  { emoji: "🍓", word: "FRAGOLA", phoneticPc: "fragola", phoneticAndroid: "fragola" },
+  { emoji: "🫐", word: "MIRTILLI", phoneticPc: "mirtilli", phoneticAndroid: "mirtilli" },
+  { emoji: "🥝", word: "KIWI", phoneticPc: "kiwi", phoneticAndroid: "kiwi", mediaSrc: "media/kiwi.jpg" },
+  { emoji: "🍍", word: "ANANAS", phoneticPc: "ananas", phoneticAndroid: "ananas" },
+  { emoji: "🥭", word: "MANGO", phoneticPc: "mango", phoneticAndroid: "mango" },
+  { emoji: "🍈", word: "MELONE", phoneticPc: "melone", phoneticAndroid: "melone" },
+  { emoji: "🍒", word: "CILIEGIE", phoneticPc: "ciliegi", phoneticAndroid: "ciliegi" },
+  { emoji: "🍅", word: "POMODORO", phoneticPc: "pomodoro", phoneticAndroid: "pomodoro" },
 
   // 🧼 Extra oggetti familiari
-  { emoji: "🧼", word: "SAPONE" },
-  { emoji: "👟", word: "SCARPA" }
+  { emoji: "🪥", word: "SPAZZOLINO", phoneticPc: "spazzolino", phoneticAndroid: "spazzolino" },
+  { emoji: "🧺", word: "CESTO", phoneticPc: "cesto", phoneticAndroid: "cesto" },
+  { emoji: "🧦", word: "CALZINI", phoneticPc: "calzini", phoneticAndroid: "calzini" },
+  { emoji: "🧤", word: "GUANTI", phoneticPc: "guanti", phoneticAndroid: "guanti" },
 
+  // 🍽️ Oggetti da cucina
+  { emoji: "🥄", word: "CUCCHIAIO", phoneticPc: "cucchiaio", phoneticAndroid: "cucchiaio" },
+  { emoji: "🔪", word: "COLTELLO", phoneticPc: "coltello", phoneticAndroid: "coltello" },
+  { emoji: "🧊", word: "GHIACCIO", phoneticPc: "ghiaccio", phoneticAndroid: "ghiaccio" },
+
+  // 🛝 Altri oggetti parco
+  { emoji: "🎈", word: "PALLONCINO", phoneticPc: "pallonciño", phoneticAndroid: "pallonciño" },
+
+  // 🧼 Extra oggetti familiari
+  { emoji: "🧼", word: "SAPONE", phoneticPc: "sapone", phoneticAndroid: "sapone" },
+  { emoji: "👟", word: "SCARPA", phoneticPc: "scarpa", phoneticAndroid: "scarpa" }
 ];
 
 let objects = [...originalObjects];
@@ -573,6 +574,82 @@ function speakCurrentWord() {
 
   speechSynthesis.speak(utterance);
 }
+
+// 🔊 Gestione voci e modalità TTS
+let selectedVoice = null;
+let voiceMode = 'auto';
+
+// Popola il select delle voci disponibili
+function populateVoiceList() {
+  const voices = speechSynthesis.getVoices();
+  const select = document.getElementById('voiceSelect');
+  select.innerHTML = ''; // pulisce eventuali voci precedenti
+
+  voices.forEach((voice, i) => {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = `${voice.name} (${voice.lang})${voice.default ? ' [default]' : ''}`;
+    select.appendChild(option);
+  });
+
+  // Imposta la voce di default
+  if (voices.length > 0) {
+    selectedVoice = voices[0];
+    select.value = 0;
+  }
+}
+
+// Alcuni browser caricano le voci in modo asincrono
+populateVoiceList();
+if (speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = populateVoiceList;
+}
+
+// Aggiorna la voce quando cambia il select
+document.getElementById('voiceSelect').addEventListener('change', (e) => {
+  const voices = speechSynthesis.getVoices();
+  selectedVoice = voices[e.target.value];
+});
+
+// Aggiorna la modalità di pronuncia
+document.getElementById('voiceModeSelect').addEventListener('change', (e) => {
+  voiceMode = e.target.value;
+});
+
+// Sovrascrive speakCurrentWord per usare voce e modalità selezionata
+const originalSpeakCurrentWord = speakCurrentWord;
+speakCurrentWord = function() {
+  if (!currentObject) return;
+
+  let textToSpeak = currentObject.word;
+
+  // Applicazione modalità TTS selezionata
+  if (voiceMode === 'auto') {
+    // Automatico: usa phonetic se presente
+    if (isAndroid() && currentObject.phoneticAndroid) {
+      textToSpeak = currentObject.phoneticAndroid;
+    } else if (!isAndroid() && currentObject.phoneticPc) {
+      textToSpeak = currentObject.phoneticPc;
+    }
+  } else if (voiceMode === 'pc' && currentObject.phoneticPc) {
+    textToSpeak = currentObject.phoneticPc;
+  } else if (voiceMode === 'android' && currentObject.phoneticAndroid) {
+    textToSpeak = currentObject.phoneticAndroid;
+  } else if (voiceMode === 'syllables' && currentObject.syllables) {
+    textToSpeak = currentObject.syllables.join(' ');
+  }
+
+  if (speechSynthesis.speaking) speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(textToSpeak);
+  if (selectedVoice) utterance.voice = selectedVoice;
+  utterance.lang = 'it-IT';
+  utterance.rate = 0.95;
+  utterance.pitch = 1.0;
+
+  speechSynthesis.speak(utterance);
+};
+
 
 // collega il bottone (una sola volta)
 document.getElementById('speakWord')
