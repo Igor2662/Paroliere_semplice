@@ -2,7 +2,7 @@
 /* ---------- dati originali ---------- */
 const originalObjects = [
   { emoji: "🎵️", word: "INNO", phoneticPc: "inno", phoneticAndroid: "inno", mediaSrc: "media/inno.mp4" },
-  { emoji: "🐱", word: "GATTO", phoneticPc: "gatti", phoneticAndroid: "gatta", mediaSrc: "media/gatto.mp3"},
+  { emoji: "🐱", word: "GATTO", phoneticPc: "gatto", phoneticAndroid: "gatto", mediaSrc: "media/gatto.mp3"},
   { emoji: "🚲", word: "BICICLETTA", phoneticPc: "bichicletta", phoneticAndroid: "bichicletta", mediaSrc: "media/bici.jpg" },
 
   // 🎒 Oggetti dell'astuccio
